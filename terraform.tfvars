@@ -3,8 +3,8 @@ os_version                      = "R81"                                         
 gw-network-vnet-cidr            = "xxx.xxx.xxx.xxx/xx"                              # VNET range
 gw-network-subnet-cidr          = "xxx.xxx.xxx.xxx/xx"                              # Internal Subnet
 gw-network-internal-subnet-cidr = "xxx.xxx.xxx.xxx/xx"                              # External Subnet
-gw-external-private-ip          = "xxx.xxx.xxx.xxx/xx"                              # External IP address
-gw-internal-private-ip          = "xxx.xxx.xxx.xxx/xx"                              # Internal IP address
+gw-external-private-ip          = "xxx.xxx.xxx.xxx"                              # External IP address
+gw-internal-private-ip          = "xxx.xxx.xxx.xxx"                              # Internal IP address
 webapp-subnet-cidr              = "xxx.xxx.xxx.xxx/xx"                              # Webapp Subnet
 location                        = "West Europe"                                     # Azure region - https://azure.microsoft.com/regions
 

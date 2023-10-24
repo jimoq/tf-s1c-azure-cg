@@ -8,11 +8,11 @@ resource "null_resource" "smart-1-cloud" {
     secretkey = "${var.secretkey}"
   }
   provisioner "local-exec" {
-    command = "python smart-1-Cloud-API.py register -i ${var.clientid} -k ${var.secretkey}  -n ${var.company}-cp-gw > registration_token.txt"
+    command = "python3 smart-1-Cloud-API.py register -i ${var.clientid} -k ${var.secretkey}  -n ${var.company}-cp-gw > registration_token.txt"
     when    = create
   }
   provisioner "local-exec" {
-    command = "python smart-1-Cloud-API.py delete -i ${self.triggers.clientid} -k ${self.triggers.secretkey}  -n ${self.triggers.gwname} > registration_token.txt"
+    command = "python3 smart-1-Cloud-API.py delete -i ${self.triggers.clientid} -k ${self.triggers.secretkey}  -n ${self.triggers.gwname} > registration_token.txt"
     when    = destroy
   }
 }
@@ -45,7 +45,7 @@ resource "null_resource" "smart-1-cloud-establish-sic" {
 
   }
   provisioner "local-exec" {
-    command = "python smart-1-Cloud-Mgmt-API.py -g ${var.company}-cp-gw -k ${var.mgmt_api_key} -i ${var.smart_1_cloud_instance} -c ${var.smart_1_cloud_context} -s ${var.sic_key} -v ${var.os_version}"
+    command = "python3 smart-1-Cloud-Mgmt-API.py -g ${var.company}-cp-gw -k ${var.mgmt_api_key} -i ${var.smart_1_cloud_instance} -c ${var.smart_1_cloud_context} -s ${var.sic_key} -v ${var.os_version}"
     when    = create
   }
 
