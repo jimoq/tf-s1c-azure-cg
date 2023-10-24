@@ -84,11 +84,11 @@ variable "secretkey" {
   description = "secretkey"
 }
 
-#Smart-1-cloud Mgmt Domain
-variable "smart_1_mgmt_domain" {
-  type        = string
-  description = "mgmtdomain"
-}
+#Smart-1-cloud Mgmt Domain - Not in use
+#variable "smart_1_mgmt_domain" {
+#  type        = string
+#  description = "mgmtdomain"
+#}
 
 #Management API Key
 variable "mgmt_api_key" {
