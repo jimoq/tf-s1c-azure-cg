@@ -81,9 +81,27 @@ def main():
         print("gateway is not ready to establish SIC. Trying again in 10 seconds")
         time.sleep(10)
 
+    # Get Security Gateway interfaces and topology
+    get_interface_URL = f"https://{parsed_args.instance}.maas.checkpoint.com/{parsed_args.context}/web_api/get-interfaces"
+    get_interface_payload = json.dumps({
+        "name": parsed_args.gateway,
+        "with-topology" : true
+    })
+
+    headers = {
+        'Content-Type': 'application/json',
+        'X-chkp-sid': sid
+    }
+
+    get_interface_res = requests.request(
+        "POST", get_interface_URL, headers=headers, data=get_interface_payload)
+
+    print(get_interface_res)
+
     # change clean up rule to accept and log all traffic
     set_policy_URL = f"https://{parsed_args.instance}.maas.checkpoint.com/{parsed_args.context}/web_api/set-access-rule"
     set_policy_payload = json.dumps({
+        "layer": "Network",
         "name": "Clean up",
         "action": "accept",
         "track": {"type": "log"}
