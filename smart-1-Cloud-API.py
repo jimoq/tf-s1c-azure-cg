@@ -26,7 +26,7 @@ def main():
     parsed_args = parser.parse_args()
 
 
-    URL = "https://cloudinfra-gw-us.portal.checkpoint.com"
+    URL = "https://cloudinfra-gw.portal.checkpoint.com"
     auth = f"{URL}/auth/external"
     mgmt_service=f"{URL}/mgmt-service"
     gateways=f"{URL}/app/maas/api/v1/gateways"
