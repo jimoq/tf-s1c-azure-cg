@@ -66,7 +66,7 @@ variable "password" {
   description = "Password"
 }
 
-# version of the gateway (R80.40 or R81..)
+# version of the gateway (r80.40 or r81..)
 variable "os_version" {
   description = "GAIA OS version"
   type        = string

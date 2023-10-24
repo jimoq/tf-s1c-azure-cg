@@ -85,7 +85,7 @@ def main():
     get_interface_URL = f"https://{parsed_args.instance}.maas.checkpoint.com/{parsed_args.context}/web_api/get-interfaces"
     get_interface_payload = json.dumps({
         "name": parsed_args.gateway,
-        "with-topology" : true
+        "with-topology" : "true"
     })
 
     headers = {
