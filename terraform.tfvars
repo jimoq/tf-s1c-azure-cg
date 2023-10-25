@@ -1,5 +1,5 @@
 company                         = "NA-SE-Demo"                                      # use to derive the hostname
-os_version                      = "R81"                                             # Gateway Version
+os_version                      = "r81"                                             # Gateway Version
 gw-network-vnet-cidr            = "xxx.xxx.xxx.xxx/xx"                              # VNET range
 gw-network-subnet-cidr          = "xxx.xxx.xxx.xxx/xx"                              # Internal Subnet
 gw-network-internal-subnet-cidr = "xxx.xxx.xxx.xxx/xx"                              # External Subnet
