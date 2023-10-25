@@ -5,6 +5,7 @@ Automatically deploy a gateway in Azure and connect it to Check Point Smart-1 Cl
 
 ## Prerequisites
 * Smart 1 Cloud Tenant in the [Check Point Infinity Portal](https://portal.checkpoint.com)
+* Microsoft Azure account (https://portal.azure.com)
 * Launch GitHub Code spaces from the repository
 
 ## Usage:
