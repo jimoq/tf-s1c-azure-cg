@@ -30,8 +30,8 @@ def main():
     auth = f"{URL}/auth/external"
     mgmt_service=f"{URL}/mgmt-service"
     gateways=f"{URL}/app/maas/api/v1/gateways"
- #   delete_gateway=f"{URL}/app/maas/api/v1/gateways/{parsed_args.name}?deleteObjectFromConfiguration=true"
-    delete_gateway=f"{URL}/app/maas/api/v1/gateways/{parsed_args.name}"
+    delete_gateway=f"{URL}/app/maas/api/v1/gateways/{parsed_args.name}?deleteObjectFromConfiguration=true"
+#    delete_gateway=f"{URL}/app/maas/api/v1/gateways/{parsed_args.name}"
     payload = json.dumps({
     "clientId": parsed_args.clientid,
     "accessKey": parsed_args.password
@@ -64,8 +64,8 @@ def main():
                 payload=json.dumps({
                         "name":parsed_args.name,
                         "description":"Added using Python API script",
-                        "type": "gateway",
-                        "action": "registerOnly"})
+                        "type": "gateway"})
+#                        "action": "registerOnly"})
                 headers = {
                 'Content-Type': 'application/json',
                 'Authorization': f"Bearer {token}" 

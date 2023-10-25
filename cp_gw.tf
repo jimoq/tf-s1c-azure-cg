@@ -32,25 +32,25 @@ data "template_file" "userdata_setup" {
   }
 }
 
-## Establish SIC for the deployed gateway
-#
-#resource "null_resource" "smart-1-cloud-establish-sic" {
-#  triggers = {
-#    gateway                = "${var.company}-cp-gw"
-#    mgmt_api_key           = "${var.mgmt_api_key}"
-#    smart_1_cloud_instance = "${var.smart_1_cloud_instance}"
-#    smart_1_cloud_context  = "${var.smart_1_cloud_context}"
-#    # smart_1_mgmt_domain    = "${var.smart_1_mgmt_domain}"
-#    os_version             = "${var.os_version}"
-#
-#  }
-#  provisioner "local-exec" {
-#    command = "python3 smart-1-Cloud-Mgmt-API.py -g ${var.company}-cp-gw -k ${var.mgmt_api_key} -i ${var.smart_1_cloud_instance} -c ${var.smart_1_cloud_context} -s ${var.sic_key} -v ${var.os_version}"
-#    when    = create
-#  }
-#
-#  depends_on = [azurerm_virtual_machine.cp-gw]
-#}
+# Establish SIC for the deployed gateway
+
+resource "null_resource" "smart-1-cloud-establish-sic" {
+  triggers = {
+    gateway                = "${var.company}-cp-gw"
+    mgmt_api_key           = "${var.mgmt_api_key}"
+    smart_1_cloud_instance = "${var.smart_1_cloud_instance}"
+    smart_1_cloud_context  = "${var.smart_1_cloud_context}"
+    # smart_1_mgmt_domain    = "${var.smart_1_mgmt_domain}"
+    os_version             = "${var.os_version}"
+
+  }
+  provisioner "local-exec" {
+    command = "python3 smart-1-Cloud-Mgmt-API.py -g ${var.company}-cp-gw -k ${var.mgmt_api_key} -i ${var.smart_1_cloud_instance} -c ${var.smart_1_cloud_context} -s ${var.sic_key} -v ${var.os_version}"
+    when    = create
+  }
+
+  depends_on = [azurerm_virtual_machine.cp-gw]
+}
 
 #CP GW NICS
 resource "azurerm_network_interface" "cp-gw-external" {

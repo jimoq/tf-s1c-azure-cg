@@ -62,7 +62,6 @@ def main():
         'Content-Type': 'application/json',
         'X-chkp-sid': sid
     }
-
     # establish SIC for the gateway
     while True:
         gateway_config_res = requests.request(
@@ -84,7 +83,7 @@ def main():
     # Get Security Gateway interfaces and topology
     get_interface_URL = f"https://{parsed_args.instance}.maas.checkpoint.com/{parsed_args.context}/web_api/get-interfaces"
     get_interface_payload = json.dumps({
-        "name": parsed_args.gateway,
+        "target-name": parsed_args.gateway,
         "with-topology" : "true"
     })
 
@@ -96,13 +95,37 @@ def main():
     get_interface_res = requests.request(
         "POST", get_interface_URL, headers=headers, data=get_interface_payload)
 
-    print(get_interface_res)
+    print(get_interface_res.json())
+
+    task_id = get_interface_res.json()['task-id']
+    show_get_interface_status = f"https://{parsed_args.instance}.maas.checkpoint.com/{parsed_args.context}/web_api/show-task"
+
+    show_get_interface_payload = json.dumps({
+        "task-id": task_id,
+    })
+
+    while True:
+        show_get_interface_res = requests.request(
+            "POST", show_get_interface_status, headers=headers, data=show_get_interface_payload)
+        if show_get_interface_res.json()['tasks'][0]['status'] == "in progress":
+
+            print(
+                "get interfaces in progress, waiting for 20 Seconds to succeed")
+            time.sleep(20)
+
+        elif show_get_interface_res.json()['tasks'][0]['status'] == "succeeded":
+            print(f"get interfaces in succeded {show_get_interface_res}")
+            break
+
+        else:
+            print(show_get_interface_res.json()['tasks'][0]['status'])
+            break
 
     # change clean up rule to accept and log all traffic
     set_policy_URL = f"https://{parsed_args.instance}.maas.checkpoint.com/{parsed_args.context}/web_api/set-access-rule"
     set_policy_payload = json.dumps({
         "layer": "Network",
-        "name": "Clean up",
+        "name": "Cleanup rule",
         "action": "accept",
         "track": {"type": "log"}
     })
@@ -115,7 +138,7 @@ def main():
     set_policy_res = requests.request(
         "POST", set_policy_URL, headers=headers, data=set_policy_payload)
 
-    print(set_policy_res)
+    print(set_policy_res.json())
 
     # publish everything
     publish_URL = f"https://{parsed_args.instance}.maas.checkpoint.com/{parsed_args.context}/web_api/publish"
@@ -134,7 +157,6 @@ def main():
         "access": "True",
         "threat-prevention": "False"
     }
-
     install_policy_res = requests.request(
         "POST", install_policy_URL, headers=headers, json=install_policy_payload)
     print(f"Policy Installation ended with: {install_policy_res.text}")
