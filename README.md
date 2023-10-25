@@ -5,33 +5,10 @@ Automatically deploy a gateway in Azure and connect it to Check Point Smart-1 Cl
 
 ## Prerequisites
 * Smart 1 Cloud Tenant in the [Check Point Infinity Portal](https://portal.checkpoint.com)
-* Terraform
-* Azure CLI
-* requests library for the python script (pip install requests)
+* Launch GitHub Code spaces from the repository
 
 ## Usage:
-
-Clone the repository:
-
-```hcl
-git clone https://github.com/alshawwaf/Smart1-Cloud-GW-Terraform.git
-```
-
-Ensure that you have Azure CLI installed. Once installed run the following commands in Powershell.
-
-This logs into the Azure Tenant:
-
-```hcl
-az login
-```
-
-Accept the licensing agreement (if you chose not to use the provided azurerm_marketplace_agreement):
-
-```hcl
-az vm image terms accept --urn checkpoint:check-point-cg-r81:sg-byol:latest
-```
-
-Edit the variables as required. Review terraform.tfvars.
+Edit and add the variables as required to a new file called terraform.tfvars.
 
 ```hcl
 company                         = "NA-SE-Demo"                                      # use to derive the hostname
