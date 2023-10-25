@@ -1,9 +1,12 @@
 module "policy" {
-  depends_on = [ azurerm_virtual_machine.cp-gw ]
+#  depends_on = [ azurerm_virtual_machine.cp-gw ]
   source = "./policy"
 
-  cp_gw_name = azurerm_virtual_machine.cp-gw.name
+#  cp_gw_name = azurerm_virtual_machine.cp-gw.name
+  cp_gw_name = "TF-SE-Demo-cp-gw"
   sic_key  = var.sic_key 
+  gw-external-private-ip = var.gw-external-private-ip
+  gw-internal-private-ip = var.gw-internal-private-ip
 }
 
 // Example - Trigger the publish resource every time there is a change on any of the configuration files in a specific module

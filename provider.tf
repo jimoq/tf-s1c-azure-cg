@@ -6,7 +6,7 @@ terraform {
     }
     checkpoint = {
        source = "checkpointsw/checkpoint"
-#       version = "~> 1.1.0"
+       version = "2.5.0"
      }
   }
 }

@@ -5,3 +5,11 @@ variable "cp_gw_name" {
 variable "sic_key" {
   type = string
 }
+
+variable "gw-external-private-ip" {
+  type = string
+}
+
+variable "gw-internal-private-ip" {
+  type = string
+}
