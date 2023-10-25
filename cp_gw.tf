@@ -8,18 +8,18 @@ resource "null_resource" "smart-1-cloud" {
     secretkey = "${var.secretkey}"
   }
   provisioner "local-exec" {
-    command = "python3 smart-1-Cloud-API.py register -i ${var.clientid} -k ${var.secretkey}  -n ${var.company}-cp-gw > registration_token.txt"
+    command = "python3 smart-1-Cloud-API.py register -i ${var.clientid} -k ${var.secretkey}  -n ${var.company}-cp-gw"
     when    = create
   }
   provisioner "local-exec" {
-    command = "python3 smart-1-Cloud-API.py delete -i ${self.triggers.clientid} -k ${self.triggers.secretkey}  -n ${self.triggers.gwname} > registration_token.txt"
+    command = "python3 smart-1-Cloud-API.py delete -i ${self.triggers.clientid} -k ${self.triggers.secretkey}  -n ${self.triggers.gwname}"
     when    = destroy
   }
 }
 
 data "local_file" "registrationtoken" {
   depends_on = [null_resource.smart-1-cloud]
-  filename   = "registration_token.txt"
+  filename   = "maas_registration_token.txt"
 }
 
 data "template_file" "userdata_setup" {

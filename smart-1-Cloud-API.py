@@ -73,7 +73,17 @@ def main():
 
                 response = requests.request("POST", gateways, headers=headers, data=payload)
 
-                print(response.json()['data']['token'],end="")
+#                print(response.json()['data']['token'],end="")
+                maas_token = response.json()['data']['token']
+                maas_ip = response.json()['data']['ip']
+
+                # Writing maas registration token to maas_registration_toke.txt
+                with open("maas_registration_token.txt", "w") as outfile:
+                    outfile.write(maas_token)
+
+                # Writing maas IP to maas_ip.txt
+                with open("maas_ip.txt", "w") as outfile:
+                    outfile.write(maas_ip)
 
             except Exception as e:
                 print (response.text)
